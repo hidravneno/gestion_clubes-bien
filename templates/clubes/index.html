@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Clubes</title>
+</head>
+<body>
+    <h1>🏆 Bienvenido a la Gestión de Clubes 🏆</h1>
+    <h2>Lista de Clubes</h2>
+    <ul>
+        {% for club in clubes %}
+            <li>{{ club.nombre }} - {{ club.descripcion }}</li>
+        {% empty %}
+            <li>No hay clubes disponibles.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'crear_club' %}">➕ Crear Nuevo Club</a>
+</body>
+</html>
