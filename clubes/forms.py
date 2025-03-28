@@ -4,4 +4,4 @@ from .models import Club
 class CrearClubForm(forms.ModelForm):
     class Meta:
         model = Club
-        fields = ['nombre', 'descripcion', 'categoria']
+        fields = ['nombre', 'descripcion', 'categoria']  # Excluye 'lider'

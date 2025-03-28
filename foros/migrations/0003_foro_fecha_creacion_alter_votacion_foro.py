@@ -2,6 +2,7 @@
 
 import django.db.models.deletion
 from django.db import migrations, models
+from django.utils import timezone  # Asegúrate de importar timezone
 
 
 class Migration(migrations.Migration):
@@ -14,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='foro',
             name='fecha_creacion',
-            field=models.DateTimeField(auto_now_add=True, default=1),
+            field=models.DateTimeField(auto_now_add=True, default=timezone.now),  # Cambié default=1 por timezone.now
             preserve_default=False,
         ),
         migrations.AlterField(
