@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Lista de Foros</h2>
+<ul>
+    {% for foro in foros %}
+    <li>{{ foro.titulo }} - {{ foro.club }}</li>
+    {% empty %}
+    <li>No hay foros disponibles.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'crear_foro' %}">Crear nuevo Foro</a>
+{% endblock %}
