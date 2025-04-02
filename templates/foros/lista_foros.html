@@ -1,13 +1,54 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Lista de Foros</h2>
-<ul>
-    {% for foro in foros %}
-    <li>{{ foro.titulo }} - {{ foro.club }}</li>
-    {% empty %}
-    <li>No hay foros disponibles.</li>
-    {% endfor %}
-</ul>
-<a href="{% url 'crear_foro' %}">Crear nuevo Foro</a>
+<style>
+    body {
+        background-color: #e0f7fa; /* Azul claro casi cyan */
+    }
+    .content-wrapper {
+        background-color: white; /* Fondo blanco para el contenido */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 900px;
+        margin: auto;
+    }
+</style>
+
+<div class="container mt-4">
+    <div class="content-wrapper">
+        <h2 class="text-center mb-4">Lista de Foros</h2>
+
+        {% if foros %}
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Título</th>
+                    <th>Club</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for foro in foros %}
+                <tr>
+                    <td>{{ foro.titulo }}</td>
+                    <td>{{ foro.club }}</td>
+                    <td>
+                        <a href="{% url 'detalle_foro' foro.id %}" class="btn btn-info btn-sm">Ver</a>
+                        <a href="{% url 'editar_foro' foro.id %}" class="btn btn-warning btn-sm">Editar</a>
+                        <a href="{% url 'eliminar_foro' foro.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="alert alert-warning text-center">No hay foros disponibles.</div>
+        {% endif %}
+
+        <div class="text-center mt-4">
+            <a href="{% url 'crear_foro' %}" class="btn btn-success">Crear nuevo Foro</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
