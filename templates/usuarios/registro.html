@@ -1,14 +1,87 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Registro de Usuario</title>
-</head>
-<body>
-    <h2>Registro de Usuario</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Registrarse</button>
-    </form>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Registro de Usuario{% endblock %}
+
+{% block content %}
+<style>
+    /* Estilo del fondo con efecto parallax */
+    .parallax {
+        background-image: url('https://source.unsplash.com/1600x900/?abstract,technology'); 
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Animación elegante para el formulario */
+    .card {
+        animation: fadeIn 1.2s ease-in-out;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Botón con efecto elegante */
+    .btn-primary {
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        border: none;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #2575fc, #6a11cb);
+        transform: scale(1.05);
+    }
+</style>
+
+<div class="parallax">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center text-light mb-4">Registro de Usuario</h2>
+                <form method="post" class="card p-4">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <label for="{{ form.username.id_for_label }}" class="font-weight-bold">Nombre de Usuario</label>
+                        {{ form.username }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.email.id_for_label }}" class="font-weight-bold">Correo Electrónico</label>
+                        {{ form.email }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.password1.id_for_label }}" class="font-weight-bold">Contraseña</label>
+                        {{ form.password1 }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.password2.id_for_label }}" class="font-weight-bold">Confirmar Contraseña</label>
+                        {{ form.password2 }}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

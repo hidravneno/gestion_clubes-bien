@@ -1,18 +1,30 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Lista de Clubes</title>
-</head>
-<body>
-    <h1>🏆 Bienvenido a la Gestión de Clubes 🏆</h1>
-    <h2>Lista de Clubes</h2>
-    <ul>
-        {% for club in clubes %}
-            <li>{{ club.nombre }} - {{ club.descripcion }}</li>
-        {% empty %}
-            <li>No hay clubes disponibles.</li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'crear_club' %}">➕ Crear Nuevo Club</a>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Lista de Clubes{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h2 class="text-secondary">Lista de Clubes</h2>
+</div>
+
+<div class="card shadow-sm mt-3">
+    <div class="card-body">
+        <ul class="list-group">
+            {% for club in clubes %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>{{ club.nombre }}</strong>
+                        <p class="mb-0 text-muted">{{ club.descripcion }}</p>
+                    </div>
+                </li>
+            {% empty %}
+                <li class="list-group-item text-center text-muted">No hay clubes disponibles.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<div class="text-center mt-4">
+    <a href="{% url 'crear_club' %}" class="btn btn-success">➕ Crear Nuevo Club</a>
+</div>
+{% endblock %}
