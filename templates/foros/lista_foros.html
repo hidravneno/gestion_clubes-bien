@@ -33,11 +33,6 @@
                 <tr>
                     <td>{{ foro.titulo }}</td>
                     <td>{{ foro.club }}</td>
-                    <td>
-                        <a href="{% url 'detalle_foro' foro.id %}" class="btn btn-info btn-sm">Ver</a>
-                        <a href="{% url 'editar_foro' foro.id %}" class="btn btn-warning btn-sm">Editar</a>
-                        <a href="{% url 'eliminar_foro' foro.id %}" class="btn btn-danger btn-sm">Eliminar</a>
-                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
