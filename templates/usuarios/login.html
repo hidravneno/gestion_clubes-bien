@@ -1,21 +1,106 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <h2 class="text-center mb-4">Iniciar Sesión</h2>
-            
-            <form method="post" class="card p-4 shadow-sm">
-                {% csrf_token %}
-                <div class="mb-3">
-                    {{ form.as_p }}
+<style>
+    .container-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #f8f9fa;
+    }
+
+    /* Tarjeta del formulario con bordes sutiles */
+    .card {
+        background: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 2rem;
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Título elegante pero ligero */
+    .form-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        text-align: center;
+        color: #333;
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Estilo de los inputs */
+    .form-control {
+        background: #ffffff;
+        border: 1px solid #ccc;
+        color: #333;
+        padding: 10px;
+        border-radius: 6px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .form-control:focus {
+        border-color: #666;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Botón con diseño más suave */
+    .btn-primary {
+        background: #007bff;
+        color: #fff;
+        border: 1px solid transparent;
+        padding: 12px;
+        border-radius: 6px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        text-transform: none; /* Elimina las mayúsculas */
+        transition: all 0.3s ease-in-out;
+    }
+
+    .btn-primary:hover {
+        background: #0056b3;
+        border-color: #004085;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+        transform: scale(1.03);
+    }
+
+    /* Enlace de registro con estilo */
+    .register-link {
+        color: #007bff;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .register-link:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="container-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card">
+                    <h2 class="form-title">Iniciar Sesión</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            {{ form.as_p }}
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block w-100">Iniciar Sesión</button>
+                    </form>
+
+                    <div class="text-center mt-3">
+                        <p>¿No tienes una cuenta? <a href="{% url 'register' %}" class="register-link">Regístrate aquí</a></p>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block w-100">Iniciar Sesión</button>
-            </form>
-            
-            <div class="text-center mt-3">
-                <p>¿No tienes una cuenta? <a href="{% url 'register' %}">Regístrate aquí</a></p>
             </div>
         </div>
     </div>

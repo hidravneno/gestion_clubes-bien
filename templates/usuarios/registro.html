@@ -4,82 +4,109 @@
 
 {% block content %}
 <style>
-    /* Estilo del fondo con efecto parallax */
-    .parallax {
-        background-image: url('https://source.unsplash.com/1600x900/?abstract,technology'); 
-        background-attachment: fixed;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        height: 100vh;
+    .container-center {
         display: flex;
         justify-content: center;
         align-items: center;
+        height: 100vh;
+        background: #f8f9fa;
     }
 
-    /* Animación elegante para el formulario */
+    /* Tarjeta del formulario con bordes sutiles */
     .card {
-        animation: fadeIn 1.2s ease-in-out;
-        background: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(10px);
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        background: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 2rem;
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
     }
 
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(-20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15);
     }
 
-    /* Botón con efecto elegante */
+    /* Título elegante pero ligero */
+    .form-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        text-align: center;
+        color: #333;
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Estilo de los inputs */
+    .form-control {
+        background: #ffffff;
+        border: 1px solid #ccc;
+        color: #333;
+        padding: 10px;
+        border-radius: 6px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .form-control:focus {
+        border-color: #666;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Botón con diseño más suave */
     .btn-primary {
-        background: linear-gradient(135deg, #6a11cb, #2575fc);
-        border: none;
+        background: rgb(0, 123, 255);
+        color: #fff;
+        border: 1px solid transparent;
+        padding: 12px;
+        border-radius: 6px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        text-transform: none;
         transition: all 0.3s ease-in-out;
     }
 
     .btn-primary:hover {
-        background: linear-gradient(135deg, #2575fc, #6a11cb);
-        transform: scale(1.05);
+        background: rgb(0, 97, 201);
+        border-color: rgb(1, 83, 170);
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+        transform: scale(1.03);
     }
+
 </style>
 
-<div class="parallax">
+<div class="container-center">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-6">
-                <h2 class="text-center text-light mb-4">Registro de Usuario</h2>
-                <form method="post" class="card p-4">
-                    {% csrf_token %}
-                    
-                    <div class="form-group">
-                        <label for="{{ form.username.id_for_label }}" class="font-weight-bold">Nombre de Usuario</label>
-                        {{ form.username }}
-                    </div>
+            <div class="col-md-5">
+                <div class="card">
+                    <h2 class="form-title">Registro de Usuario</h2>
+                    <form method="post">
+                        {% csrf_token %}
 
-                    <div class="form-group">
-                        <label for="{{ form.email.id_for_label }}" class="font-weight-bold">Correo Electrónico</label>
-                        {{ form.email }}
-                    </div>
+                        <div class="form-group">
+                            <label for="{{ form.username.id_for_label }}" class="font-weight-bold text-dark">Nombre de Usuario</label>
+                            {{ form.username }}
+                        </div>
 
-                    <div class="form-group">
-                        <label for="{{ form.password1.id_for_label }}" class="font-weight-bold">Contraseña</label>
-                        {{ form.password1 }}
-                    </div>
+                        <div class="form-group">
+                            <label for="{{ form.email.id_for_label }}" class="font-weight-bold text-dark">Correo Electrónico</label>
+                            {{ form.email }}
+                        </div>
 
-                    <div class="form-group">
-                        <label for="{{ form.password2.id_for_label }}" class="font-weight-bold">Confirmar Contraseña</label>
-                        {{ form.password2 }}
-                    </div>
+                        <div class="form-group">
+                            <label for="{{ form.password1.id_for_label }}" class="font-weight-bold text-dark">Contraseña</label>
+                            {{ form.password1 }}
+                        </div>
 
-                    <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
-                </form>
+                        <div class="form-group">
+                            <label for="{{ form.password2.id_for_label }}" class="font-weight-bold text-dark">Confirmar Contraseña</label>
+                            {{ form.password2 }}
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

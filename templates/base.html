@@ -8,15 +8,15 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Gestor de Clubes</a>
+        <a class="navbar-brand font-weight-bold" href="{% url 'lista_clubes' %}" style="font-size: 1.5rem;">Gestor de Clubes</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="{% url 'lista_clubes' %}">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Registro</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Cerrar Sesion</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'lista_clubes' %}" style="font-size: 1rem;" >Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'register' %}" style="font-size: 1rem;">Registro</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}" style="font-size: 1rem;">Cerrar Sesión</a></li>
             </ul>
         </div>
     </nav>
