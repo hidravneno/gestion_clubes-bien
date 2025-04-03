@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ foro.titulo }}</h2>
+<p><strong>Club:</strong> {{ foro.club }}</p>
+<p><strong>Descripción:</strong> {{ foro.descripcion }}</p>
+<a href="{% url 'lista_foros' %}" class="btn btn-secondary">Volver</a>
+{% endblock %}
