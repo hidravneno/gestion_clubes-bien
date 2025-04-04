@@ -4,45 +4,84 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-6">
-            <div class="card shadow-lg rounded-3">
-                <div class="card-header bg-primary text-white text-center">
-                    <h3 class="mb-0">🚀 Crear Nuevo Club</h3>
+            <div class="card shadow-lg rounded-4 border-0" style="background-color: #fdfdfd; font-family: 'Poppins', sans-serif;">
+                <!-- Encabezado con estilo elegante -->
+                <div class="card-header text-white text-center rounded-top"
+                    style="background: linear-gradient(135deg, #007bff, #6610f2); box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);">
+                    <h3 class="mb-0 fw-bold">Crear Nuevo Club</h3>
                 </div>
-                <div class="card-body">
+
+                <div class="card-body p-4">
                     <form method="post" novalidate>
                         {% csrf_token %}
 
-                        <!-- Renderizar formularios con Bootstrap -->
+                        <!-- Renderizar formularios con estilo refinado -->
                         {% for field in form %}
-                        <div class="mb-3">
-                            <label for="{{ field.id_for_label }}" class="form-label fw-bold">
+                        <div class="mb-4">
+                            <label for="{{ field.id_for_label }}" class="form-label fw-semibold text-dark" style="font-size: 1.1rem;">
                                 {{ field.label }}
                             </label>
                             {{ field }}
                             {% if field.help_text %}
-                            <small class="form-text text-muted">{{ field.help_text }}</small>
+                                <small class="form-text text-muted">{{ field.help_text }}</small>
                             {% endif %}
                             {% for error in field.errors %}
-                            <div class="text-danger">{{ error }}</div>
+                                <div class="text-danger">{{ error }}</div>
                             {% endfor %}
                         </div>
                         {% endfor %}
 
-                        <!-- Botón de envío -->
+                        <!-- Botón de envío con animación -->
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-success">
-                                🎉 Crear Club
+                            <button type="submit" class="btn btn-success fw-semibold shadow-sm"
+                                style="font-size: 1.1rem; padding: 10px; border-radius: 8px; transition: 0.3s;">
+                                Crear Club
                             </button>
                         </div>
                     </form>
                 </div>
-                <div class="card-footer text-center">
-                    <a href="{% url 'lista_clubes' %}" class="btn btn-secondary btn-sm">
-                        ⬅️ Volver a la Lista de Clubes
+
+                <!-- Pie de tarjeta con botón de regreso -->
+                <div class="card-footer text-center bg-light rounded-bottom">
+                    <a href="{% url 'lista_clubes' %}" class="btn btn-outline-secondary btn-sm fw-semibold"
+                        style="font-size: 1rem; padding: 8px 16px; border-radius: 8px;">
+                        Volver a la Lista de Clubes
                     </a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Estilos adicionales -->
+<style>
+    /* Fuente elegante */
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* Mejor diseño para inputs */
+    input, select, textarea {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid #ced4da;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Efecto al hacer clic en inputs */
+    input:focus, select:focus, textarea:focus {
+        border-color: #007bff;
+        box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.3);
+        outline: none;
+    }
+
+    /* Botones con efecto */
+    button:hover, a.btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.2);
+    }
+</style>
+
 {% endblock %}
