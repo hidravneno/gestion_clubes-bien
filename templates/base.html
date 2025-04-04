@@ -5,8 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <title>{% block title %}GESTOR DE CLUBES{% endblock %}</title>
+    <style>
+        /* Ajuste para que el footer no se superponga */
+        .content {
+            flex: 1;
+            padding-bottom: 80px; /* Espacio para el footer */
+        }
+    </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand font-weight-bold" href="{% url 'lista_clubes' %}" style="font-size: 1.5rem;">Gestor de Clubes</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
@@ -15,10 +23,8 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="{% url 'lista_clubes' %}" style="font-size: 1rem;">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'lista_eventos' %}" style="font-size: 1rem;">eventos</a></li>
-
+                <li class="nav-item"><a class="nav-link" href="{% url 'lista_eventos' %}" style="font-size: 1rem;">Eventos</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'register' %}" style="font-size: 1rem;">Registro</a></li>
-
                 {% if user.is_authenticated %}
                 <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}" style="font-size: 1rem;">Cerrar Sesión</a></li>
                 {% endif %}
@@ -34,8 +40,11 @@
     </div>
     {% endif %}
 
-    <div class="container mt-5">
+    <div class="container mt-5 content">
         {% block content %}
+        <h2>Agregar Clubes</h2>
+        <input type="text" id="clubInput" class="form-control mb-3" placeholder="Escribe un club y presiona Enter">
+        <ul id="clubList" class="list-group"></ul>
         {% endblock %}
     </div>
 
@@ -49,7 +58,24 @@
         </div>
     </footer>
 
+    <script>
+        document.getElementById("clubInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter" && this.value.trim() !== "") {
+                let clubList = document.getElementById("clubList");
+                let newClub = document.createElement("li");
+                newClub.classList.add("list-group-item");
+                newClub.textContent = this.value;
+                clubList.appendChild(newClub);
+                this.value = "";
+
+                // Ajustar el espacio para que el footer no cubra el contenido
+                document.querySelector(".content").style.paddingBottom = (clubList.children.length * 10) + "px";
+            }
+        });
+    </script>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
