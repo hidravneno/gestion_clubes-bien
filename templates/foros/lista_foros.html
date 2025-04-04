@@ -32,7 +32,7 @@
                 {% for foro in foros %}
                 <tr>
                     <td>{{ foro.titulo }}</td>
-                    <td>{{ foro.club }}</td>
+                    <td>{{ foro.club.nombre }}</td>
                     <td>
                         <a href="{% url 'detalle_foro' foro.id %}" class="btn btn-info btn-sm">Ver</a>
                         <a href="{% url 'editar_foro' foro.id %}" class="btn btn-warning btn-sm">Editar</a>

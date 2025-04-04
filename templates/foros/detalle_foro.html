@@ -2,7 +2,7 @@
 
 {% block content %}
 <h2>{{ foro.titulo }}</h2>
-<p><strong>Club:</strong> {{ foro.club }}</p>
-<p><strong>Descripción:</strong> {{ foro.descripcion }}</p>
+<p><strong>Club:</strong> {{ foro.club.nombre }}</p>
+<p><strong>Descripción:</strong> {{ foro.contenido }}</p>
 <a href="{% url 'lista_foros' %}" class="btn btn-secondary">Volver</a>
 {% endblock %}
