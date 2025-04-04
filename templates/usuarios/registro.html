@@ -4,6 +4,7 @@
 
 {% block content %}
 <style>
+    /* Contenedor centralizado */
     .container-center {
         display: flex;
         justify-content: center;
@@ -12,65 +13,78 @@
         background: #f8f9fa;
     }
 
-    /* Tarjeta del formulario con bordes sutiles */
+    /* Tarjeta del formulario con bordes suaves y sombra */
     .card {
         background: #ffffff;
         border: 1px solid #ddd;
-        border-radius: 10px;
-        padding: 2rem;
-        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+        padding: 2.5rem;
+        box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease-in-out;
+        
     }
 
     .card:hover {
-        transform: translateY(-3px);
-        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15);
+        transform: translateY(-5px);
+        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.15);
     }
 
-    /* Título elegante pero ligero */
+    /* Título del formulario */
     .form-title {
-        font-size: 1.8rem;
-        font-weight: 600;
+        font-size: 2rem;
+        font-weight: 700;
         text-align: center;
-        color: #333;
-        margin-bottom: 1.5rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
+        color: #343a40;
+        margin-bottom: 2rem;
+        text-transform: none;
+        letter-spacing: 1.2px;
     }
 
     /* Estilo de los inputs */
     .form-control {
-        background: #ffffff;
+        background: #fff;
         border: 1px solid #ccc;
         color: #333;
-        padding: 10px;
-        border-radius: 6px;
+        padding: 12px;
+        border-radius: 8px;
         transition: all 0.3s ease-in-out;
     }
 
     .form-control:focus {
-        border-color: #666;
-        box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+        border-color: #007bff;
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
     }
 
-    /* Botón con diseño más suave */
+    /* Etiquetas */
+    .form-group label {
+        font-weight: 600;
+        color: #495057;
+    }
+
+    /* Botón de registro */
     .btn-primary {
-        background: rgb(0, 123, 255);
+        background: #007bff;
         color: #fff;
         border: 1px solid transparent;
-        padding: 12px;
-        border-radius: 6px;
+        padding: 12px 18px;
+        border-radius: 8px;
         font-size: 1.1rem;
         font-weight: bold;
         text-transform: none;
         transition: all 0.3s ease-in-out;
+        width: 100%;
     }
 
     .btn-primary:hover {
-        background: rgb(0, 97, 201);
-        border-color: rgb(1, 83, 170);
-        box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-        transform: scale(1.03);
+        background: #0056b3;
+        border-color: #004085;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        transform: scale(1.05);
+    }
+
+    /* Estilo de los grupos de formulario */
+    .form-group {
+        margin-bottom: 1.5rem;
     }
 
 </style>
@@ -78,37 +92,38 @@
 <div class="container-center">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-5">
+            <div class="col-md-6 col-lg-4">
                 <div class="card">
                     <h2 class="form-title">Registro de Usuario</h2>
                     <form method="post">
                         {% csrf_token %}
 
                         <div class="form-group">
-                            <label for="{{ form.username.id_for_label }}" class="font-weight-bold text-dark">Nombre de Usuario</label>
+                            <label for="{{ form.username.id_for_label }}">Nombre de Usuario</label>
                             {{ form.username }}
                         </div>
 
                         <div class="form-group">
-                            <label for="{{ form.email.id_for_label }}" class="font-weight-bold text-dark">Correo Electrónico</label>
+                            <label for="{{ form.email.id_for_label }}">Correo Electrónico</label>
                             {{ form.email }}
                         </div>
 
                         <div class="form-group">
-                            <label for="{{ form.password1.id_for_label }}" class="font-weight-bold text-dark">Contraseña</label>
+                            <label for="{{ form.password1.id_for_label }}">Contraseña</label>
                             {{ form.password1 }}
                         </div>
 
                         <div class="form-group">
-                            <label for="{{ form.password2.id_for_label }}" class="font-weight-bold text-dark">Confirmar Contraseña</label>
+                            <label for="{{ form.password2.id_for_label }}">Confirmar Contraseña</label>
                             {{ form.password2 }}
                         </div>
 
-                        <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
+                        <button type="submit" class="btn btn-primary">Registrarse</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 {% endblock %}
