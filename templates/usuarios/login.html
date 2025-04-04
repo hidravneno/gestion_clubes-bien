@@ -6,72 +6,80 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        min-height: 50vh; /* Cambiado a min-height para que siempre ocupe toda la pantalla */
         background: #f8f9fa;
+        padding: 100px;
+        margin: 0; /* Asegura que no haya margen extra */
     }
 
-    /* Tarjeta del formulario con bordes sutiles */
+    /* Tarjeta con bordes suaves y sombra elegante */
     .card {
         background: #ffffff;
         border: 1px solid #ddd;
-        border-radius: 10px;
-        padding: 2rem;
+        border-radius: 12px;
+        padding: 2.5rem;
         box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease-in-out;
+        width: 100%;
+        max-width: 500px; /* Ajusta el ancho de la tarjeta */
+        text-align: center;
     }
 
     .card:hover {
         transform: translateY(-3px);
-        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15);
+        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.15);
     }
 
-    /* Título elegante pero ligero */
+    /* Título llamativo */
     .form-title {
         font-size: 1.8rem;
         font-weight: 600;
         text-align: center;
         color: #333;
         margin-bottom: 1.5rem;
-        text-transform: uppercase;
+        text-transform: none;
         letter-spacing: 1px;
     }
 
-    /* Estilo de los inputs */
+    /* Estilos mejorados para los inputs */
     .form-control {
+        width: 100%;
         background: #ffffff;
         border: 1px solid #ccc;
         color: #333;
-        padding: 10px;
+        padding: 12px;
         border-radius: 6px;
+        font-size: 1rem;
+        margin-bottom: 1rem;
         transition: all 0.3s ease-in-out;
     }
 
     .form-control:focus {
         border-color: #666;
         box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+        outline: none;
     }
 
-    /* Botón con diseño más suave */
+    /* Botón estilizado */
     .btn-primary {
         background: #007bff;
         color: #fff;
-        border: 1px solid transparent;
+        border: none;
         padding: 12px;
+        width: 100%;
         border-radius: 6px;
         font-size: 1.1rem;
         font-weight: bold;
-        text-transform: none; /* Elimina las mayúsculas */
         transition: all 0.3s ease-in-out;
     }
 
     .btn-primary:hover {
         background: #0056b3;
-        border-color: #004085;
         box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
         transform: scale(1.03);
     }
 
-    /* Enlace de registro con estilo */
+    /* Estilo del enlace de registro */
     .register-link {
         color: #007bff;
         font-weight: bold;
@@ -81,19 +89,31 @@
     .register-link:hover {
         text-decoration: underline;
     }
+
+    /* Contenedor del formulario */
+    .form-group {
+        margin-bottom: 1rem;
+    }
 </style>
 
 <div class="container-center">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-5">
+            <div class="col-md-6"> <!-- Se amplió la columna para mejor visibilidad -->
                 <div class="card">
                     <h2 class="form-title">Iniciar Sesión</h2>
                     <form method="post" action="{% url 'login' %}">
                         {% csrf_token %}
-                        <input type="text" name="username" placeholder="Usuario">
-                        <input type="password" name="password" placeholder="Contraseña">
-                        <button type="submit">Iniciar sesión</button>
+
+                        <div class="form-group">
+                            <input type="text" name="username" class="form-control" placeholder="Usuario" required>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="password" name="password" class="form-control" placeholder="Contraseña" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
                     </form>
 
                     <div class="text-center mt-3">
