@@ -98,6 +98,16 @@
                     <form method="post">
                         {% csrf_token %}
 
+                        {% if form.errors %}
+                            <div class="alert alert-danger">
+                                <ul>
+                                    {% for field, errors in form.errors.items %}
+                                        <li><strong>{{ field }}:</strong> {{ errors|join:", " }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+
                         <div class="form-group">
                             <label for="{{ form.username.id_for_label }}">Nombre de Usuario</label>
                             {{ form.username }}
@@ -106,6 +116,11 @@
                         <div class="form-group">
                             <label for="{{ form.email.id_for_label }}">Correo Electrónico</label>
                             {{ form.email }}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.rol.id_for_label }}">Rol</label>
+                            {{ form.rol }}
                         </div>
 
                         <div class="form-group">
