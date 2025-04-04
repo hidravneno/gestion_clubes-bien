@@ -89,12 +89,11 @@
             <div class="col-md-5">
                 <div class="card">
                     <h2 class="form-title">Iniciar Sesión</h2>
-                    <form method="post">
+                    <form method="post" action="{% url 'login' %}">
                         {% csrf_token %}
-                        <div class="form-group">
-                            {{ form.as_p }}
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block w-100">Iniciar Sesión</button>
+                        <input type="text" name="username" placeholder="Usuario">
+                        <input type="password" name="password" placeholder="Contraseña">
+                        <button type="submit">Iniciar sesión</button>
                     </form>
 
                     <div class="text-center mt-3">
