@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ club.nombre }}</h1>
+    <p><strong>Descripción:</strong> {{ club.descripcion }}</p>
+    <p><strong>Fecha de creación:</strong> {{ club.fecha_creacion }}</p>
+
+    <h3>Miembros</h3>
+    <ul>
+        {% for miembro in miembros %}
+        <li>{{ miembro.usuario.username }} - {{ miembro.get_rol_display }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Eventos</h3>
+    <ul>
+        {% for evento in eventos %}
+        <li>{{ evento.nombre }} - {{ evento.fecha }}</li>
+        {% empty %}
+        <li>No hay eventos disponibles para este club.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'lista_clubes' %}" class="btn btn-secondary">Volver</a>
+</div>
+{% endblock %}

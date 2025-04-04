@@ -9,3 +9,4 @@ urlpatterns = [
     path('foros/', include('foros.urls')),       # http://127.0.0.1:8000/foros/
     path('', include('clubes.urls')),            # Ruta para página principal
 ]
+    

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Gestionar Solicitudes de Membresía</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for solicitud in solicitudes %}
+        <tr>
+            <td>{{ solicitud.usuario.username }}</td>
+            <td>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="solicitud_id" value="{{ solicitud.id }}">
+                    <button type="submit" name="accion" value="aceptar" class="btn btn-success">Aceptar</button>
+                    <button type="submit" name="accion" value="rechazar" class="btn btn-danger">Rechazar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

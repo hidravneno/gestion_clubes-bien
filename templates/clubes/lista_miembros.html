@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Miembros del Club: {{ club.nombre }}</h2>
+<ul>
+    {% for miembro in miembros %}
+    <li>{{ miembro.usuario.username }} - {{ miembro.rol }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

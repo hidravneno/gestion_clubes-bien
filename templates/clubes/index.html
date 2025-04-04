@@ -16,6 +16,7 @@
                         <strong>{{ club.nombre }}</strong>
                         <p class="mb-0 text-muted">{{ club.descripcion }}</p>
                     </div>
+                    <a href="{% url 'detalle_club' club.id %}" class="btn btn-info btn-sm">Ver Detalles</a>
                 </li>
             {% empty %}
                 <li class="list-group-item text-center text-muted">No hay clubes disponibles.</li>

@@ -2,7 +2,7 @@
 
 {% block content %}
 <h2>Crear Evento</h2>
-<form method="post">
+<form method="POST" action="{% url 'crear_evento' %}">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Crear Evento</button>
