@@ -8,3 +8,4 @@ class Evento(models.Model):
     ubicacion = models.CharField(max_length=255, blank=True, null=True)
     club = models.ForeignKey(Club, on_delete=models.CASCADE, null=True, blank=True)  # Relación con Club
 
+

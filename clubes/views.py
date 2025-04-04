@@ -23,6 +23,18 @@ def crear_club(request):
     return render(request, 'clubes/crear_club.html', {'form': form})
 
 @login_required
+def editar_club(request, club_id):
+    club = get_object_or_404(Club, id=club_id, lider=request.user)  # Solo el líder puede editar
+    if request.method == 'POST':
+        form = CrearClubForm(request.POST, instance=club)
+        if form.is_valid():
+            form.save()
+            return redirect('detalle_club', club_id=club.id)  # Redirige al detalle del club
+    else:
+        form = CrearClubForm(instance=club)
+    return render(request, 'clubes/editar_club.html', {'form': form, 'club': club})  # Cambiado a editar_club.html
+
+@login_required
 def gestionar_solicitudes(request, club_id):
     club = get_object_or_404(Club, id=club_id, lider=request.user)
     solicitudes = SolicitudMembresia.objects.filter(club=club, estado='pendiente')

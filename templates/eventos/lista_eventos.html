@@ -1,13 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Lista de Eventos</h2>
-<ul>
-    {% for evento in eventos %}
-    <li>{{ evento.nombre }} - {{ evento.fecha }}</li>
-    {% empty %}
-    <li>No hay eventos disponibles.</li>
-    {% endfor %}
-</ul>
-<a href="{% url 'crear_evento' %}">Crear nuevo evento</a>
+<div class="container mt-4">
+    <h2 class="mb-4">Lista de Eventos</h2>
+    {% if eventos %}
+    <div class="list-group">
+        {% for evento in eventos %}
+        <a href="#" class="list-group-item list-group-item-action">
+            <h5 class="mb-1">{{ evento.nombre }}</h5>
+            <p class="mb-1"><strong>Fecha:</strong> {{ evento.fecha }}</p>
+            <small>{{ evento.descripcion|truncatechars:100 }}</small>
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info" role="alert">
+        No hay eventos disponibles.
+    </div>
+    {% endif %}
+    <div class="mt-4">
+        <a href="{% url 'crear_evento' %}" class="btn btn-primary">Crear Nuevo Evento</a>
+    </div>
+</div>
 {% endblock %}
