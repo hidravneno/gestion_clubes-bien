@@ -1,28 +1,39 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Gestionar Solicitudes de Membresía</h2>
+<h2>Gestionar Solicitudes de Membresía para {{ club.nombre }}</h2>
 <table class="table">
     <thead>
         <tr>
             <th>Usuario</th>
-            <th>Acción</th>
+            <th>Estado</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
         {% for solicitud in solicitudes %}
         <tr>
             <td>{{ solicitud.usuario.username }}</td>
+            <td>{{ solicitud.get_estado_display }}</td>
             <td>
-                <form method="post">
+                {% if solicitud.estado == 'pendiente' %}
+                <form method="post" style="display: inline;">
                     {% csrf_token %}
                     <input type="hidden" name="solicitud_id" value="{{ solicitud.id }}">
-                    <button type="submit" name="accion" value="aceptar" class="btn btn-success">Aceptar</button>
-                    <button type="submit" name="accion" value="rechazar" class="btn btn-danger">Rechazar</button>
+                    <input type="hidden" name="accion" value="aceptar">
+                    <button type="submit" class="btn btn-success btn-sm">Aceptar</button>
                 </form>
+                <form method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="solicitud_id" value="{{ solicitud.id }}">
+                    <input type="hidden" name="accion" value="rechazar">
+                    <button type="submit" class="btn btn-danger btn-sm">Rechazar</button>
+                </form>
+                {% endif %}
             </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+<a href="{% url 'detalle_club' club.id %}" class="btn btn-secondary">Volver al Club</a>
 {% endblock %}

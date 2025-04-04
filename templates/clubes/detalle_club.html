@@ -4,7 +4,7 @@
 <div class="container">
     <h1>{{ club.nombre }}</h1>
     <p><strong>Descripción:</strong> {{ club.descripcion }}</p>
-    <p><strong>Fecha de creación:</strong> {{ club.fecha_creacion }}</p>
+    <p><strong>Categoría:</strong> {{ club.get_categoria_display }}</p>
 
     <h3>Miembros</h3>
     <ul>

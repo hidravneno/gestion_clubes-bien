@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Lista de Reuniones</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Club</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for reunion in reuniones %}
+        <tr>
+            <td>{{ reunion.titulo }}</td>
+            <td>{{ reunion.fecha }}</td>
+            <td>{{ reunion.hora }}</td>
+            <td>{{ reunion.club.nombre }}</td>
+            <td>
+                <a href="{% url 'editar_reunion' reunion.id %}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="{% url 'eliminar_reunion' reunion.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'crear_reunion' %}" class="btn btn-success">Crear Nueva Reunión</a>
+{% endblock %}

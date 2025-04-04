@@ -39,3 +39,14 @@ class SolicitudMembresia(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     estado = models.CharField(max_length=10, choices=ESTADOS, default='pendiente')
     fecha_solicitud = models.DateTimeField(auto_now_add=True)
+
+class Reunion(models.Model):
+    club = models.ForeignKey(Club, on_delete=models.CASCADE, related_name='reuniones')
+    titulo = models.CharField(max_length=100)
+    descripcion = models.TextField()
+    fecha = models.DateField()
+    hora = models.TimeField()
+    ubicacion = models.CharField(max_length=255, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.titulo} - {self.club.nombre}"
