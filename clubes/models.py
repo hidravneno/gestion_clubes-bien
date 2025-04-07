@@ -12,6 +12,10 @@ class Club(models.Model):
     descripcion = models.TextField()
     categoria = models.CharField(max_length=20, choices=CATEGORIAS)
     lider = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    horario = models.CharField(max_length=255, blank=True, null=True)  # Campo para el horario
+
+    def __str__(self):
+        return self.nombre
 
     def save(self, *args, **kwargs):
         user = kwargs.pop('user', None)
