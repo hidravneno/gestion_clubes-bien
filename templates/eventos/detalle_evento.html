@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalle del Evento{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-primary">{{ evento.nombre }}</h1>
+    <p><strong>Fecha:</strong> {{ evento.fecha }}</p>
+    <p><strong>Descripción:</strong> {{ evento.descripcion }}</p>
+    {% if evento.ubicacion %}
+        <p><strong>Ubicación:</strong> {{ evento.ubicacion }}</p>
+    {% endif %}
+    {% if evento.club %}
+        <p><strong>Club Organizador:</strong> {{ evento.club.nombre }}</p>
+    {% endif %}
+    <a href="{% url 'lista_eventos' %}" class="btn btn-secondary mt-3">Volver a la lista de eventos</a>
+</div>
+{% endblock %}
