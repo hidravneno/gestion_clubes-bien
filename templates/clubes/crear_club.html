@@ -31,6 +31,16 @@
                         </div>
                         {% endfor %}
 
+                        <!-- Campo para el horario del club -->
+                        <div class="mb-4">
+                            <label for="horario" class="form-label fw-semibold text-dark" style="font-size: 1.1rem;">
+                                Horario del Club
+                            </label>
+                            <input type="text" id="horario" name="horario" class="form-control" 
+                                placeholder="Ejemplo: Lunes a Viernes, 9:00 AM - 5:00 PM" required>
+                            <small class="form-text text-muted">Indica los días y horas de funcionamiento del club.</small>
+                        </div>
+
                         <!-- Botón de envío con animación -->
                         <div class="d-grid">
                             <button type="submit" class="btn btn-success fw-semibold shadow-sm"
