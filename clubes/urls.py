@@ -7,6 +7,7 @@ urlpatterns = [
     path('lista/', views.lista_clubes, name='lista_clubes'),  # Lista de clubes
     path('<int:club_id>/editar/', views.editar_club, name='editar_club'),  # Editar club
     path('<int:club_id>/', views.detalle_club, name='detalle_club'),  # **Nueva ruta para detalle_club**
+    path('eventos/<int:id>/', views.detalle_evento, name='detalle_evento'),
 
     # Rutas para reuniones
     path('<int:club_id>/reuniones/', views.lista_reuniones, name='lista_reuniones'),  # Lista de reuniones

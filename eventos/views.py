@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import EventoForm
 from .models import Evento  # Asegúrate de importar el modelo correcto
 
@@ -17,3 +17,8 @@ def crear_evento(request):
     else:
         form = EventoForm()
     return render(request, 'eventos/crear_evento.html', {'form': form})
+
+# Detalles de evento
+def detalle_evento(request, id):
+    evento = get_object_or_404(Evento, pk=id)
+    return render(request, 'eventos/detalle_evento.html', {'evento': evento})
