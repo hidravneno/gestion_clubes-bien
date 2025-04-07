@@ -2,13 +2,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-<<<<<<< HEAD
     path('', views.home, name='home'),  # Cambiado de 'index' a 'home'
-=======
->>>>>>> 2588f5e (reuniones)
     path('crear/', views.crear_club, name='crear_club'),  # Crear un nuevo club
     path('lista/', views.lista_clubes, name='lista_clubes'),  # Lista de clubes
-    # path('<int:club_id>/', views.detalle_club, name='detalle_club'),  # Eliminar esta línea si no es necesaria
     path('<int:club_id>/editar/', views.editar_club, name='editar_club'),  # Editar club
 
     # Rutas para reuniones

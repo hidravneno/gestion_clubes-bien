@@ -24,6 +24,19 @@ def crear_club(request):
         form = CrearClubForm()
     return render(request, 'clubes/crear_club.html', {'form': form})
 
+# Vista para editar un club
+@login_required
+def editar_club(request, club_id):
+    club = get_object_or_404(Club, id=club_id, lider=request.user)  # Solo el líder puede editar el club
+    if request.method == 'POST':
+        form = CrearClubForm(request.POST, instance=club)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_clubes')
+    else:
+        form = CrearClubForm(instance=club)
+    return render(request, 'clubes/editar_club.html', {'form': form, 'club': club})
+
 # Vista para listar reuniones
 @login_required
 def lista_reuniones(request, club_id):
@@ -108,3 +121,7 @@ def detalle_club(request, club_id):
         'miembros': miembros,
         'eventos': eventos,
     })
+
+# Vista para la página principal
+def home(request):
+    return render(request, 'clubes/index.html')  # Asegúrate de que el template exista
