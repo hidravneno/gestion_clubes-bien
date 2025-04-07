@@ -1,8 +1,22 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import Http404, HttpResponseNotFound
 from .models import Club, MiembroClub, SolicitudMembresia, Reunion
 from .forms import CrearClubForm, CrearReunionForm
 from django.contrib.auth.decorators import login_required
 from eventos.models import Evento  # Importar el modelo Evento
+from functools import wraps
+
+# Decorador para verificar que el usuario sea el líder del club
+def lider_requerido(func):
+    @wraps(func)
+    def wrapper(request, club_id, *args, **kwargs):
+        try:
+            club = Club.objects.get(id=club_id, lider=request.user)
+        except Club.DoesNotExist:
+            # Renderiza la plantilla personalizada para el error 404
+            return HttpResponseNotFound(render(request, '404.html'))
+        return func(request, club_id, *args, **kwargs)
+    return wrapper
 
 # Vista para listar clubes
 @login_required
@@ -26,8 +40,9 @@ def crear_club(request):
 
 # Vista para editar un club
 @login_required
+@lider_requerido
 def editar_club(request, club_id):
-    club = get_object_or_404(Club, id=club_id, lider=request.user)  # Solo el líder puede editar el club
+    club = Club.objects.get(id=club_id)
     if request.method == 'POST':
         form = CrearClubForm(request.POST, instance=club)
         if form.is_valid():

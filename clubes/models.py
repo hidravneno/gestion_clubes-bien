@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, PermissionDenied
 from usuarios.models import Usuario
 
 class Club(models.Model):
@@ -12,6 +12,12 @@ class Club(models.Model):
     descripcion = models.TextField()
     categoria = models.CharField(max_length=20, choices=CATEGORIAS)
     lider = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+
+    def save(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        if user and self.lider != user:
+            raise PermissionDenied("No tienes permiso para editar este club.")
+        super().save(*args, **kwargs)
 
 class MiembroClub(models.Model):
     ROLES = (

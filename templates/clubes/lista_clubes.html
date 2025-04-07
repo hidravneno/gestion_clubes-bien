@@ -1,0 +1,11 @@
+{% for club in clubes %}
+    <tr>
+        <td>{{ club.nombre }}</td>
+        <td>{{ club.descripcion }}</td>
+        <td>
+            {% if club.lider == request.user %}
+                <a href="{% url 'editar_club' club.id %}" class="btn btn-warning btn-sm">Editar</a>
+            {% endif %}
+        </td>
+    </tr>
+{% endfor %}
