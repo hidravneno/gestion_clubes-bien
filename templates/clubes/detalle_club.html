@@ -22,8 +22,6 @@
         <li>No hay eventos disponibles para este club.</li>
         {% endfor %}
     </ul>
-
-    <h3>Miembros del Club</h3>
 <ul>
     {% for miembro in club.miembros.all %}
         <li>{{ miembro.username }}</li>
