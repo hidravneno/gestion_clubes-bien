@@ -16,7 +16,7 @@
                     <h5 class="card-title fw-bold text-dark">{{ evento.nombre }}</h5>
                     <p class="card-text"><strong>Fecha:</strong> {{ evento.fecha }}</p>
                     <p class="text-muted">{{ evento.descripcion|truncatechars:100 }}</p>
-                    <a href="#" class="btn btn-outline-primary btn-sm">Ver Detalles</a>
+                    <a href="{% url 'detalle_evento' evento.id %}" class="btn btn-outline-primary btn-sm">Ver Detalles</a>
                 </div>
             </div>
         </div>
