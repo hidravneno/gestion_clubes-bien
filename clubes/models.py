@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError, PermissionDenied
+from django.conf import settings  # Importar settings para AUTH_USER_MODEL
 from usuarios.models import Usuario
 
 class Club(models.Model):
@@ -13,6 +14,7 @@ class Club(models.Model):
     categoria = models.CharField(max_length=20, choices=CATEGORIAS)
     lider = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     horario = models.CharField(max_length=255, blank=True, null=True)  # Campo para el horario
+    miembros = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='clubes', blank=True)  # Usar AUTH_USER_MODEL
 
     def __str__(self):
         return self.nombre

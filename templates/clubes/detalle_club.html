@@ -23,6 +23,15 @@
         {% endfor %}
     </ul>
 
+    <h3>Miembros del Club</h3>
+<ul>
+    {% for miembro in club.miembros.all %}
+        <li>{{ miembro.username }}</li>
+    {% empty %}
+        <li>No hay miembros en este club.</li>
+    {% endfor %}
+</ul>
+
     <a href="{% url 'lista_clubes' %}" class="btn btn-secondary">Volver</a>
 </div>
 {% endblock %}

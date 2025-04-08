@@ -3,6 +3,7 @@ from django.http import Http404, HttpResponseNotFound
 from .models import Club, MiembroClub, SolicitudMembresia, Reunion
 from .forms import CrearClubForm, CrearReunionForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages  # Importar messages
 from eventos.models import Evento  # Importar el modelo Evento
 from functools import wraps
 
@@ -140,3 +141,15 @@ def detalle_club(request, club_id):
 # Vista para la página principal
 def home(request):
     return render(request, 'clubes/index.html')  # Asegúrate de que el template exista
+
+
+# Vista para unirse a un club
+@login_required
+def unirse_club(request, club_id):
+    club = get_object_or_404(Club, id=club_id)
+    if request.user in club.miembros.all():
+        messages.warning(request, "Ya eres miembro de este club.")
+    else:
+        club.miembros.add(request.user)
+        messages.success(request, f"Te has unido al club {club.nombre}.")
+    return redirect('detalle_club', club_id=club.id)

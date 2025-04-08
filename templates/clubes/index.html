@@ -11,19 +11,20 @@
     <div class="card-body">
         <ul class="list-group">
             {% for club in clubes %}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div>
-                        <strong>{{ club.nombre }}</strong>
-                        <p class="mb-0 text-muted">{{ club.descripcion }}</p>
-                    </div>
-                    <div>
-                        <a href="{% url 'detalle_club' club.id %}" class="btn btn-info btn-sm">Ver Detalles</a>
-                        <a href="{% url 'editar_club' club.id %}" class="btn btn-warning btn-sm">Editar</a>
-                    </div>
-                </li>
-            {% empty %}
-                <li class="list-group-item text-center text-muted">No hay clubes disponibles.</li>
-            {% endfor %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>{{ club.nombre }}</strong>
+                    <p class="mb-0 text-muted">{{ club.descripcion }}</p>
+                </div>
+                <div>
+                    <a href="{% url 'detalle_club' club.id %}" class="btn btn-info btn-sm">Ver Detalles</a>
+                    <a href="{% url 'editar_club' club.id %}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="{% url 'unirse_club' club.id %}" class="btn btn-primary btn-sm">Unirse</a>
+                </div>
+            </li>
+        {% empty %}
+            <li class="list-group-item text-center text-muted">No hay clubes disponibles.</li>
+        {% endfor %}
         </ul>
     </div>
 </div>

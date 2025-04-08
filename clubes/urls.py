@@ -13,4 +13,5 @@ urlpatterns = [
     path('<int:club_id>/reuniones/crear/', views.crear_reunion, name='crear_reunion'),  # Crear reunión
     path('<int:club_id>/reuniones/<int:reunion_id>/editar/', views.editar_reunion, name='editar_reunion'),  # Editar reunión
     path('<int:club_id>/reuniones/<int:reunion_id>/eliminar/', views.eliminar_reunion, name='eliminar_reunion'),  # Eliminar reunión
+    path('clubes/<int:club_id>/unirse/', views.unirse_club, name='unirse_club'),
 ]
