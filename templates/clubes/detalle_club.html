@@ -7,13 +7,6 @@
     <p><strong>Categoría:</strong> {{ club.get_categoria_display }}</p>
     <p><strong>Horario:</strong> {{ club.horario }}</p> <!-- Nuevo campo agregado -->
 
-    <h3>Miembros</h3>
-    <ul>
-        {% for miembro in miembros %}
-        <li>{{ miembro.usuario.username }} - {{ miembro.get_rol_display }}</li>
-        {% endfor %}
-    </ul>
-
     <h3>Eventos</h3>
     <ul>
         {% for evento in eventos %}
@@ -22,13 +15,15 @@
         <li>No hay eventos disponibles para este club.</li>
         {% endfor %}
     </ul>
-<ul>
-    {% for miembro in club.miembros.all %}
-        <li>{{ miembro.username }}</li>
-    {% empty %}
-        <li>No hay miembros en este club.</li>
-    {% endfor %}
-</ul>
+
+    <h3>Miembros del Club</h3>
+    <ul>
+        {% for miembro in club.miembros.all %}
+            <li>{{ miembro.username }}</li>
+        {% empty %}
+            <li>No hay miembros en este club.</li>
+        {% endfor %}
+    </ul>
 
     <a href="{% url 'lista_clubes' %}" class="btn btn-secondary">Volver</a>
 </div>
