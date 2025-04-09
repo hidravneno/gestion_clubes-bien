@@ -4,24 +4,21 @@
 
 {% block content %}
 <style>
-    /* Contenedor centralizado */
     .container-center {
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        height: 100vh; /* Mantiene el diseño centrado */
         background: #f8f9fa;
     }
 
-    /* Tarjeta del formulario con bordes suaves y sombra */
     .card {
         background: #ffffff;
         border: 1px solid #ddd;
         border-radius: 12px;
-        padding: 2.5rem;
+        padding: 4rem 3rem; /* Aumentado el padding vertical para mayor altura */
         box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease-in-out;
-        
     }
 
     .card:hover {
@@ -29,23 +26,21 @@
         box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.15);
     }
 
-    /* Título del formulario */
     .form-title {
-        font-size: 2rem;
+        font-size: 2.2rem; /* Aumentado ligeramente */
         font-weight: 700;
         text-align: center;
         color: #343a40;
-        margin-bottom: 2rem;
+        margin-bottom: 3rem; /* Más espacio debajo del título */
         text-transform: none;
         letter-spacing: 1.2px;
     }
 
-    /* Estilo de los inputs */
     .form-control {
         background: #fff;
         border: 1px solid #ccc;
         color: #333;
-        padding: 12px;
+        padding: 14px; /* Aumentado para inputs más grandes */
         border-radius: 8px;
         transition: all 0.3s ease-in-out;
     }
@@ -55,20 +50,13 @@
         box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
     }
 
-    /* Etiquetas */
-    .form-group label {
-        font-weight: 600;
-        color: #495057;
-    }
-
-    /* Botón de registro */
     .btn-primary {
         background: #007bff;
         color: #fff;
         border: 1px solid transparent;
-        padding: 12px 18px;
+        padding: 14px 20px; /* Botón más grande */
         border-radius: 8px;
-        font-size: 1.1rem;
+        font-size: 1.2rem; /* Texto más grande */
         font-weight: bold;
         text-transform: none;
         transition: all 0.3s ease-in-out;
@@ -82,17 +70,15 @@
         transform: scale(1.05);
     }
 
-    /* Estilo de los grupos de formulario */
     .form-group {
-        margin-bottom: 1.5rem;
+        margin-bottom: 2.5rem; /* Más espacio entre campos */
     }
-
 </style>
 
 <div class="container-center">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-8 col-lg-6"> <!-- Mantiene el ancho igual -->
                 <div class="card">
                     <h2 class="form-title">Registro de Usuario</h2>
                     <form method="post">
