@@ -21,13 +21,15 @@
                     </div>
                 {% endif %}
 
-                {{ form.as_p }}
+                <div class="mb-4">
+                    {{ form.as_p }}
+                </div>
 
-                <div class="d-flex justify-content-center gap-3 mt-4">
-                    <button type="submit" class="btn btn-success px-4 py-2 fw-semibold">
+                <div class="d-flex justify-content-center gap-4 mt-4">
+                    <button type="submit" class="btn btn-success px-5 py-3 fw-semibold shadow-sm">
                         <i class="fas fa-check-circle"></i> Guardar Cambios
                     </button>
-                    <a href="{% url 'lista_foros' %}" class="btn btn-outline-secondary px-4 py-2 fw-semibold">
+                    <a href="{% url 'lista_foros' %}" class="btn btn-outline-danger px-5 py-3 fw-semibold shadow-sm">
                         <i class="fas fa-times-circle"></i> Cancelar
                     </a>
                 </div>
@@ -40,3 +42,56 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
 
 {% endblock %}
+
+<!-- Estilos personalizados -->
+<style>
+/* Estilos personalizados para los textbox (input y textarea) */
+input, textarea {
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 12px;
+    width: 100%;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Efecto cuando el campo de texto está enfocado */
+input:focus, textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+/* Mejora la apariencia de las etiquetas */
+label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* Estilo para las alertas de errores */
+.alert {
+    font-size: 1rem;
+    border-radius: 8px;
+}
+
+/* Opcional: Estilo para campos con error */
+input.is-invalid, textarea.is-invalid {
+    border-color: #dc3545;
+    box-shadow: 0 0 5px rgba(220, 53, 69, 0.5);
+}
+
+/* Estilo para los botones */
+button {
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+button:focus {
+    outline: none;
+}
+</style>

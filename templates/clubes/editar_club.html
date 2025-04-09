@@ -3,20 +3,42 @@
 {% block title %}Editar Club{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="card shadow-lg rounded-4 border-0">
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="card shadow-lg rounded-4 border-0" style="max-width: 700px; width: 100%;">
         <div class="card-body p-5">
-            <h1 class="card-title text-center text-primary display-4 fw-bold mb-4">Editar Club: {{ club.nombre }}</h1>
+            <h1 class="card-title text-center text-primary display-4 fw-bold mb-4">
+                Editar Club: {{ club.nombre }}
+            </h1>
 
-            <form method="post">
+            <form method="post" class="needs-validation" novalidate>
                 {% csrf_token %}
-                {{ form.as_p }}
                 
+                <!-- Estructura de los campos centrados -->
+                <div class="d-flex flex-column align-items-center gap-3">
+                    <!-- Nombre -->
+                    <div class="w-100">
+                        {{ form.nombre.label_tag }}
+                        {{ form.nombre }}
+                    </div>
+
+                    <!-- Descripción -->
+                    <div class="w-100">
+                        {{ form.descripcion.label_tag }}
+                        {{ form.descripcion }}
+                    </div>
+
+                    <!-- Categoría -->
+                    <div class="w-100">
+                        {{ form.categoria.label_tag }}
+                        {{ form.categoria }}
+                    </div>
+                </div>
+
                 <div class="text-center mt-4">
-                    <button type="submit" class="btn btn-success btn-lg px-5 rounded-pill">
+                    <button type="submit" class="btn btn-success btn-lg px-5 rounded-pill shadow-sm">
                         Guardar Cambios
                     </button>
-                    <a href="{% url 'lista_clubes' %}" class="btn btn-secondary btn-lg px-5 rounded-pill">
+                    <a href="{% url 'lista_clubes' %}" class="btn btn-secondary btn-lg px-5 rounded-pill shadow-sm">
                         Cancelar
                     </a>
                 </div>
@@ -24,4 +46,80 @@
         </div>
     </div>
 </div>
+
+<style>
+    /* Estilos generales */
+    .card {
+        background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+        border: 1px solid #dee2e6;
+    }
+
+    h1 {
+        font-family: 'Oswald', sans-serif;
+        letter-spacing: 1px;
+    }
+
+    form {
+        font-family: 'Roboto', sans-serif;
+    }
+
+    /* Campos centrados */
+    .d-flex {
+        display: flex;
+    }
+
+    .flex-column {
+        flex-direction: column;
+    }
+
+    .align-items-center {
+        align-items: center;
+    }
+
+    .gap-3 {
+        gap: 1.5rem;
+    }
+
+    /* Estilo de inputs, selects y textarea */
+    input, select, textarea {
+        width: 100%;
+        max-width: 500px;
+        border-radius: 8px;
+        border: 1px solid #ced4da;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: #80bdff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    /* Botón Guardar Cambios */
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+        transition: all 0.3s ease;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Botón Cancelar */
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+        border-color: #545b62;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+</style>
 {% endblock %}
