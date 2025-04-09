@@ -1,11 +1,42 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Editar Foro</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Guardar Cambios</button>
-    <a href="{% url 'lista_foros' %}" class="btn btn-secondary">Cancelar</a>
-</form>
+<div class="container mt-5">
+    <div class="card shadow-lg rounded-4 border-0">
+        <div class="card-body p-5">
+            <h2 class="card-title mb-4 text-center fw-bold text-primary">Editar Foro</h2>
+
+            <form method="POST" class="needs-validation" novalidate>
+                {% csrf_token %}
+                
+                {% if form.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <h5 class="alert-heading"><i class="fas fa-exclamation-circle"></i> Errores al enviar el formulario:</h5>
+                        <ul class="mb-0">
+                            {% for field, errors in form.errors.items %}
+                                <li><strong>{{ field|capfirst }}:</strong> {{ errors|join:", " }}</li>
+                            {% endfor %}
+                        </ul>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endif %}
+
+                {{ form.as_p }}
+
+                <div class="d-flex justify-content-center gap-3 mt-4">
+                    <button type="submit" class="btn btn-success px-4 py-2 fw-semibold">
+                        <i class="fas fa-check-circle"></i> Guardar Cambios
+                    </button>
+                    <a href="{% url 'lista_foros' %}" class="btn btn-outline-secondary px-4 py-2 fw-semibold">
+                        <i class="fas fa-times-circle"></i> Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- FontAwesome para iconos -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+
 {% endblock %}

@@ -1,8 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>{{ foro.titulo }}</h2>
-<p><strong>Club:</strong> {{ foro.club.nombre }}</p>
-<p><strong>Descripción:</strong> {{ foro.contenido }}</p>
-<a href="{% url 'lista_foros' %}" class="btn btn-secondary">Volver</a>
+<div class="container mt-5">
+    <div class="card shadow-lg rounded-4 border-0">
+        <div class="card-body p-5">
+            <h1 class="card-title text-center text-primary display-4 fw-bold mb-4">{{ foro.titulo }}</h1>
+            <ul class="list-group list-group-flush mb-4">
+                <li class="list-group-item fs-5"><strong>Club:</strong> {{ foro.club.nombre }}</li>
+                <li class="list-group-item fs-5"><strong>Descripción:</strong> {{ foro.contenido }}</li>
+            </ul>
+            <div class="text-center mt-4">
+                <a href="{% url 'lista_foros' %}" class="btn btn-success btn-lg px-5 rounded-pill">
+                    ← Volver a la lista de foros
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

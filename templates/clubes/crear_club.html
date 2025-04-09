@@ -2,96 +2,59 @@
 
 {% block content %}
 <div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6">
-            <div class="card shadow-lg rounded-4 border-0" style="background-color: #fdfdfd; font-family: 'Poppins', sans-serif;">
-                <!-- Encabezado con estilo elegante -->
-                <div class="card-header text-white text-center rounded-top"
-                    style="background: linear-gradient(135deg, #007bff, #6610f2); box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);">
-                    <h3 class="mb-0 fw-bold">Crear Nuevo Club</h3>
-                </div>
+    <div class="card shadow-lg rounded-4 border-0">
+        <div class="card-body p-5">
+            <h2 class="card-title mb-4 text-center fw-bold text-primary">Crear Nuevo Club</h2>
 
-                <div class="card-body p-4">
-                    <form method="post" novalidate>
-                        {% csrf_token %}
+            <form method="POST" action="{% url 'crear_club' %}" class="needs-validation" novalidate>
+                {% csrf_token %}
 
-                        <!-- Renderizar formularios con estilo refinado -->
-                        {% for field in form %}
-                        <div class="mb-4">
-                            <label for="{{ field.id_for_label }}" class="form-label fw-semibold text-dark" style="font-size: 1.1rem;">
-                                {{ field.label }}
-                            </label>
-                            {{ field }}
-                            {% if field.help_text %}
-                                <small class="form-text text-muted">{{ field.help_text }}</small>
-                            {% endif %}
-                            {% for error in field.errors %}
-                                <div class="text-danger">{{ error }}</div>
+                {% if form.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <h5 class="alert-heading"><i class="fas fa-exclamation-circle"></i> Errores al enviar el formulario:</h5>
+                        <ul class="mb-0">
+                            {% for field, errors in form.errors.items %}
+                                <li><strong>{{ field|capfirst }}:</strong> {{ errors|join:", " }}</li>
                             {% endfor %}
-                        </div>
+                        </ul>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endif %}
+
+                {% for field in form %}
+                    <div class="mb-4">
+                        <label for="{{ field.id_for_label }}" class="form-label fw-semibold text-dark">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.help_text %}
+                            <div class="form-text text-muted">{{ field.help_text }}</div>
+                        {% endif %}
+                        {% for error in field.errors %}
+                            <div class="invalid-feedback d-block">{{ error }}</div>
                         {% endfor %}
+                    </div>
+                {% endfor %}
 
-                        <!-- Campo para el horario del club -->
-                        <div class="mb-4">
-                            <label for="horario" class="form-label fw-semibold text-dark" style="font-size: 1.1rem;">
-                                Horario del Club
-                            </label>
-                            <input type="text" id="horario" name="horario" class="form-control" 
-                                placeholder="Ejemplo: Lunes a Viernes, 9:00 AM - 5:00 PM" required>
-                            <small class="form-text text-muted">Indica los días y horas de funcionamiento del club.</small>
-                        </div>
-
-                        <!-- Botón de envío con animación -->
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-success fw-semibold shadow-sm"
-                                style="font-size: 1.1rem; padding: 10px; border-radius: 8px; transition: 0.3s;">
-                                Crear Club
-                            </button>
-                        </div>
-                    </form>
+                <div class="mb-4">
+                    <label for="horario" class="form-label fw-semibold text-dark">Horario del Club</label>
+                    <input type="text" id="horario" name="horario" class="form-control" 
+                        placeholder="Ejemplo: Lunes a Viernes, 9:00 AM - 5:00 PM" required>
+                    <small class="form-text text-muted">Indica los días y horas de funcionamiento del club.</small>
                 </div>
 
-                <!-- Pie de tarjeta con botón de regreso -->
-                <div class="card-footer text-center bg-light rounded-bottom">
-                    <a href="{% url 'lista_clubes' %}" class="btn btn-outline-secondary btn-sm fw-semibold"
-                        style="font-size: 1rem; padding: 8px 16px; border-radius: 8px;">
-                        Volver a la Lista de Clubes
+                <div class="d-flex justify-content-center gap-3">
+                    <button type="submit" class="btn btn-success px-4 py-2 fw-semibold">
+                        <i class="fas fa-check-circle"></i> Crear Club
+                    </button>
+                    <a href="{% url 'lista_clubes' %}" class="btn btn-outline-secondary px-4 py-2 fw-semibold">
+                        <i class="fas fa-times-circle"></i> Cancelar
                     </a>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
 
-<!-- Estilos adicionales -->
-<style>
-    /* Fuente elegante */
-    body {
-        font-family: 'Poppins', sans-serif;
-    }
-
-    /* Mejor diseño para inputs */
-    input, select, textarea {
-        width: 100%;
-        padding: 10px;
-        border: 2px solid #ced4da;
-        border-radius: 8px;
-        font-size: 1rem;
-        transition: all 0.3s ease-in-out;
-    }
-
-    /* Efecto al hacer clic en inputs */
-    input:focus, select:focus, textarea:focus {
-        border-color: #007bff;
-        box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.3);
-        outline: none;
-    }
-
-    /* Botones con efecto */
-    button:hover, a.btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.2);
-    }
-</style>
+<!-- FontAwesome para iconos -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
 
 {% endblock %}
