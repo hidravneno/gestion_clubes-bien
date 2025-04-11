@@ -1,68 +1,111 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>{% block title %}GESTOR DE EVENTOS{% endblock %}</title>
+    <style>
+        /* Ajuste para que el footer no se superponga */
+        .content {
+            flex: 1;
+            padding-bottom: 80px; /* Espacio para el footer */
+        }
 
-{% block content %}
-<div class="container mt-5">
-    <div class="text-center mb-4">
-        <h2 class="fw-bold text-primary">Lista de Eventos</h2>
-        <p class="text-muted">Explora los eventos próximos y sus detalles</p>
-    </div>
+        /* Tarjetas de eventos con marco */
+        .event-card {
+            background: #fff;
+            border: 2px solid #ddd; /* Marco visible */
+            transition: all 0.3s ease-in-out;
+            padding: 15px;
+        }
 
-    {% if eventos %}
-    <div class="row">
-        {% for evento in eventos %}
-        <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card shadow-sm border rounded-4 event-card">
-                <div class="card-body">
-                    <h5 class="card-title fw-bold text-dark">{{ evento.nombre }}</h5>
-                    <p class="card-text"><strong>Fecha:</strong> {{ evento.fecha }}</p>
-                    <p class="text-muted">{{ evento.descripcion|truncatechars:100 }}</p>
-                    <a href="{% url 'detalle_evento' evento.id %}" class="btn btn-outline-primary btn-sm">Ver Detalles</a>
-                </div>
-            </div>
+        
+
+        /* Botón con animación */
+      
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand font-weight-bold" href="{% url 'lista_clubes' %}" style="font-size: 1.5rem;">Gestor de Clubes</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="{% url 'lista_clubes' %}" style="font-size: 1rem;">Clubes</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'lista_eventos' %}" style="font-size: 1rem;">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'lista_foros' %}" style="font-size: 1rem;">Foros</a></li>
+                {% if not user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'register' %}" style="font-size: 1rem;">Registro</a></li>
+                {% endif %}
+                {% if user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}" style="font-size: 1rem;">Cerrar Sesión</a></li>
+                {% endif %}
+            </ul>
         </div>
+    </nav>
+
+    {% if messages %}
+    <div class="container mt-3">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
         {% endfor %}
-    </div>
-    {% else %}
-    <div class="alert alert-info text-center py-4 rounded-4 shadow-sm">
-        <h4 class="fw-semibold">No hay eventos disponibles</h4>
-        <p class="text-muted">Sé el primero en crear un evento</p>
     </div>
     {% endif %}
 
-    <div class="text-center mt-5">
-        <a href="{% url 'crear_evento' %}" class="btn btn-success px-4 py-2 fw-semibold shadow-sm"
-            style="border-radius: 8px; transition: 0.3s;">
-            Crear Nuevo Evento
-        </a>
+    <div class="container mt-5 content">
+        {% block content %}
+        <div class="text-center mb-4">
+            <h2 class="fw-bold text-secondary">Lista de Eventos</h2>
+            <p class="text-muted">Explora los eventos próximos y sus detalles</p>
+        </div>
+
+        {% if eventos %}
+        <div class="row">
+            {% for evento in eventos %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="event-card">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-dark">{{ evento.nombre }}</h5>
+                        <p class="card-text"><strong>Fecha:</strong> {{ evento.fecha }}</p>
+                        <p class="text-muted">{{ evento.descripcion|truncatechars:100 }}</p>
+                        <a href="{% url 'detalle_evento' evento.id %}" class="btn btn-info btn-sm">Ver Detalles</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="alert alert-info text-center py-4 rounded-4 shadow-sm">
+            <h4 class="fw-semibold">No hay eventos disponibles</h4>
+            <p class="text-muted">Sé el primero en crear un evento</p>
+        </div>
+        {% endif %}
+
+        <div class="text-center mt-5">
+            <a href="{% url 'crear_evento' %}" class="btn btn-success px-4 py-2 fw-semibold shadow-sm"
+                style="border-radius: 8px; transition: 0.3s;">
+                ➕ Crear Nuevo Evento
+            </a>
+        </div>
+        {% endblock %}
     </div>
-</div>
 
-<!-- Estilos adicionales -->
-<style>
-    /* Fuente moderna */
-    body {
-        font-family: 'Poppins', sans-serif;
-    }
+    <footer class="bg-dark text-white text-center py-4 mt-auto shadow-sm">
+        <div class="container">
+            <p class="mb-2">&copy; 2025 Gestión de Eventos. Todos los derechos reservados.</p>
+            <p class="mb-0">
+                Contacto: 
+                <a href="mailto:soporte@eventos.com" class="text-info">soporte@eventos.com</a>
+            </p>
+        </div>
+    </footer>
 
-    /* Tarjetas de eventos con marco */
-    .event-card {
-        background: #fff;
-        border: 2px solid #ddd; /* Marco visible */
-        transition: all 0.3s ease-in-out;
-        padding: 15px;
-    }
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
-    .event-card:hover {
-        transform: translateY(-5px);
-        border-color: #007bff; /* Cambio de color del marco al pasar el mouse */
-        box-shadow: 0px 5px 15px rgba(0, 123, 255, 0.2);
-    }
-
-    /* Botón con animación */
-    a.btn:hover {
-        transform: scale(1.05);
-        box-shadow: 0px 4px 10px rgba(40, 167, 69, 0.3);
-    }
-</style>
-
-{% endblock %}
+</body>
+</html>

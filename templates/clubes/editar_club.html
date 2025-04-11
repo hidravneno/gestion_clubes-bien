@@ -3,123 +3,138 @@
 {% block title %}Editar Club{% endblock %}
 
 {% block content %}
-<div class="container mt-5 d-flex justify-content-center">
-    <div class="card shadow-lg rounded-4 border-0" style="max-width: 700px; width: 100%;">
-        <div class="card-body p-5">
-            <h1 class="card-title text-center text-primary display-4 fw-bold mb-4">
-                Editar Club: {{ club.nombre }}
-            </h1>
-
-            <form method="post" class="needs-validation" novalidate>
-                {% csrf_token %}
-                
-                <!-- Estructura de los campos centrados -->
-                <div class="d-flex flex-column align-items-center gap-3">
-                    <!-- Nombre -->
-                    <div class="w-100">
-                        {{ form.nombre.label_tag }}
-                        {{ form.nombre }}
-                    </div>
-
-                    <!-- Descripción -->
-                    <div class="w-100">
-                        {{ form.descripcion.label_tag }}
-                        {{ form.descripcion }}
-                    </div>
-
-                    <!-- Categoría -->
-                    <div class="w-100">
-                        {{ form.categoria.label_tag }}
-                        {{ form.categoria }}
-                    </div>
-                </div>
-
-                <div class="text-center mt-4">
-                    <button type="submit" class="btn btn-success btn-lg px-5 rounded-pill shadow-sm">
-                        Guardar Cambios
-                    </button>
-                    <a href="{% url 'lista_clubes' %}" class="btn btn-secondary btn-lg px-5 rounded-pill shadow-sm">
-                        Cancelar
-                    </a>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
 <style>
-    /* Estilos generales */
-    .card {
-        background: linear-gradient(to bottom, #ffffff, #f8f9fa);
-        border: 1px solid #dee2e6;
-    }
-
-    h1 {
-        font-family: 'Oswald', sans-serif;
-        letter-spacing: 1px;
-    }
-
-    form {
-        font-family: 'Roboto', sans-serif;
-    }
-
-    /* Campos centrados */
-    .d-flex {
+    .container-center {
         display: flex;
-    }
-
-    .flex-column {
-        flex-direction: column;
-    }
-
-    .align-items-center {
+        justify-content: center;
         align-items: center;
+        min-height: calc(100vh - 120px); /* Espacio entre nav y footer */
+        margin: 60px 0; /* Espaciado superior e inferior */
+        background: #f8f9fa;
     }
 
-    .gap-3 {
-        gap: 1.5rem;
+    .card {
+        background: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        padding: 4rem 3rem;
+        box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
     }
 
-    /* Estilo de inputs, selects y textarea */
-    input, select, textarea {
-        width: 100%;
-        max-width: 500px;
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .form-title {
+        font-size: 2.2rem;
+        font-weight: 700;
+        text-align: center;
+        color: #343a40;
+        margin-bottom: 3rem;
+        letter-spacing: 1.2px;
+    }
+
+    .form-control {
+        background: #fff;
+        border: 1px solid #ccc;
+        color: #333;
+        padding: 14px;
         border-radius: 8px;
-        border: 1px solid #ced4da;
-        padding: 10px;
-        font-size: 16px;
+        transition: all 0.3s ease-in-out;
     }
 
-    input:focus, select:focus, textarea:focus {
-        outline: none;
-        border-color: #80bdff;
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
     }
 
-    /* Botón Guardar Cambios */
     .btn-success {
-        background-color: #28a745;
-        border-color: #28a745;
-        transition: all 0.3s ease;
+        background: #28a745;
+        color: #fff;
+        border: 1px solid transparent;
+        padding: 14px 20px;
+        border-radius: 8px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        transition: all 0.3s ease-in-out;
+        width: 100%;
     }
 
     .btn-success:hover {
         background-color: #218838;
         border-color: #1e7e34;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        transform: scale(1.05);
     }
 
-    /* Botón Cancelar */
     .btn-secondary {
-        background-color: #6c757d;
-        border-color: #6c757d;
-        transition: all 0.3s ease;
+        background: #6c757d;
+        color: #fff;
+        border: 1px solid transparent;
+        padding: 14px 20px;
+        border-radius: 8px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        transition: all 0.3s ease-in-out;
+        width: 100%;
     }
 
     .btn-secondary:hover {
-        background-color: #5a6268;
+        background: #5a6268;
         border-color: #545b62;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        transform: scale(1.05);
+    }
+
+    .form-group {
+        margin-bottom: 2.5rem;
+    }
+
+    .gap-3 {
+        gap: 1.5rem;
     }
 </style>
+
+<div class="container-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card">
+                    <h2 class="form-title">Editar Club: {{ club.nombre }}</h2>
+                    <form method="post" class="needs-validation" novalidate>
+                        {% csrf_token %}
+
+                        <div class="d-flex flex-column align-items-center gap-3">
+                            <div class="form-group w-100">
+                                {{ form.nombre.label_tag }}
+                                {{ form.nombre }}
+                            </div>
+
+                            <div class="form-group w-100">
+                                {{ form.descripcion.label_tag }}
+                                {{ form.descripcion }}
+                            </div>
+
+                            <div class="form-group w-100">
+                                {{ form.categoria.label_tag }}
+                                {{ form.categoria }}
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-4">
+                            <div class="me-2"> <!-- Espacio entre botones -->
+                                <button type="submit" class="btn btn-success" style="background-color: #007bff; color: #fff; border: none;">Guardar Cambios</button>
+                            </div>
+                            <div class="ms-2"> <!-- Espacio entre botones -->
+                                <a href="{% url 'lista_clubes' %}" class="btn btn-secondary">Cancelar</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -1,53 +1,149 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="card shadow-lg rounded-4 border-0">
-        <div class="card-body p-5">
-            <h2 class="card-title mb-4 text-center fw-bold text-primary">Crear Foro y Votación</h2>
+<style>
+    .container-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: calc(100vh - 120px); /* Espacio entre nav y footer */
+        margin: 60px 0; /* Espaciado superior e inferior */
+        background: #f8f9fa;
+    }
 
-            <form method="POST" class="needs-validation" novalidate>
-                {% csrf_token %}
-                
-                {% if form.errors %}
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <h5 class="alert-heading"><i class="fas fa-exclamation-circle"></i> Errores al enviar el formulario:</h5>
-                        <ul class="mb-0">
-                            {% for field, errors in form.errors.items %}
-                                <li><strong>{{ field|capfirst }}:</strong> {{ errors|join:", " }}</li>
-                            {% endfor %}
-                        </ul>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                {% endif %}
+    .card {
+        background: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        padding: 4rem 3rem;
+        box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
+    }
 
-                {% for field in form %}
-                    <div class="mb-4">
-                        <label for="{{ field.id_for_label }}" class="form-label fw-semibold text-dark">{{ field.label }}</label>
-                        {{ field }}
-                        {% if field.help_text %}
-                            <div class="form-text text-muted">{{ field.help_text }}</div>
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .form-title {
+        font-size: 2.2rem;
+        font-weight: 700;
+        text-align: center;
+        color: #343a40;
+        margin-bottom: 3rem;
+        letter-spacing: 1.2px;
+    }
+
+    .form-control {
+        background: #fff;
+        border: 1px solid #ccc;
+        color: #333;
+        padding: 14px;
+        border-radius: 8px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+    }
+
+    .btn-primary {
+        background: #007bff;
+        color: #fff;
+        border: 1px solid transparent;
+        padding: 14px 20px;
+        border-radius: 8px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        transition: all 0.3s ease-in-out;
+        width: 100%;
+    }
+
+    .btn-primary:hover {
+        background: #0056b3;
+        border-color: #004085;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        transform: scale(1.05);
+    }
+
+    .btn-secondary {
+        background: #6c757d;
+        color: #fff;
+        border: 1px solid transparent;
+        padding: 14px 20px;
+        border-radius: 8px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        transition: all 0.3s ease-in-out;
+        width: 100%;
+    }
+
+    .btn-secondary:hover {
+        background: #5a6268;
+        border-color: #545b62;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        transform: scale(1.05);
+    }
+
+
+    .form-group {
+        margin-bottom: 2.5rem;
+    }
+</style>
+
+<div class="container-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card">
+                    <h2 class="form-title">Crear Foro y Votación</h2>
+                    <form method="POST" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        
+                        {% if form.errors %}
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <h5 class="alert-heading"><i class="fas fa-exclamation-circle"></i> Errores al enviar el formulario:</h5>
+                                <ul class="mb-0">
+                                    {% for field, errors in form.errors.items %}
+                                        <li><strong>{{ field|capfirst }}:</strong> {{ errors|join:", " }}</li>
+                                    {% endfor %}
+                                </ul>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
                         {% endif %}
-                        {% for error in field.errors %}
-                            <div class="invalid-feedback d-block">{{ error }}</div>
-                        {% endfor %}
-                    </div>
-                {% endfor %}
 
-                <div class="d-flex justify-content-center gap-3 mt-4">
-                    <button type="submit" class="btn btn-success px-4 py-2 fw-semibold">
-                        <i class="fas fa-check-circle"></i> Crear Foro
-                    </button>
-                    <a href="{% url 'lista_foros' %}" class="btn btn-outline-secondary px-4 py-2 fw-semibold">
-                        <i class="fas fa-times-circle"></i> Cancelar
-                    </a>
+                        {% for field in form %}
+                            <div class="form-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.help_text %}
+                                    <div class="form-text text-muted">{{ field.help_text }}</div>
+                                {% endif %}
+                                {% for error in field.errors %}
+                                    <div class="invalid-feedback d-block">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+
+                        <div class="form-group">
+                            <label for="fecha_votacion">Fecha de Votación</label>
+                            <input type="date" id="fecha_votacion" name="fecha_votacion" class="form-control" required>
+                            <small class="form-text text-muted">Selecciona la fecha para llevar a cabo la votación.</small>
+                        </div>
+
+                        <div class="d-flex justify-content-center">
+                            <div class="me-2"> <!-- Espacio entre botones -->
+                                <button type="submit" class="btn btn-primary">Crear Foro</button>
+                            </div>
+                            <div class="ms-2"> <!-- Espacio entre botones -->
+                                <a href="{% url 'lista_foros' %}" class="btn btn-secondary">Cancelar</a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
-
-<!-- FontAwesome para iconos -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
-
 {% endblock %}

@@ -1,36 +1,99 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container mt-5" data-aos="fade-up">
-    <div class="card shadow-lg rounded-4 border-0">
-        <div class="card-body p-5">
-            <h1 class="text-center text-primary display-4 fw-bold mb-4">{{ club.nombre }}</h1>
-            <p class="fs-5"><strong>Descripción:</strong> {{ club.descripcion }}</p>
-            <p class="fs-5"><strong>Categoría:</strong> {{ club.get_categoria_display }}</p>
-            <p class="fs-5"><strong>Horario:</strong> {{ club.horario }}</p>
+<style>
+    .container-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: calc(100vh - 120px); /* Espacio entre nav y footer */
+        margin: 60px 0; /* Espaciado superior e inferior */
+        background: #f8f9fa;
+    }
 
-            <h3 class="mt-4 text-primary">Eventos</h3>
-            <ul class="list-group list-group-flush mb-4">
-                {% for evento in eventos %}
-                <li class="list-group-item fs-5">{{ evento.nombre }} - {{ evento.fecha }}</li>
-                {% empty %}
-                <li class="list-group-item fs-5">No hay eventos disponibles para este club.</li>
-                {% endfor %}
-            </ul>
+    .card {
+        background: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        padding: 4rem 3rem;
+        box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
+    }
 
-            <h3 class="mt-4 text-primary">Miembros del Club</h3>
-            <ul class="list-group list-group-flush">
-                {% for miembro in club.miembros.all %}
-                <li class="list-group-item fs-5">{{ miembro.username }}</li>
-                {% empty %}
-                <li class="list-group-item fs-5">No hay miembros en este club.</li>
-                {% endfor %}
-            </ul>
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.15);
+    }
 
-            <div class="text-center mt-4">
-                <a href="{% url 'lista_clubes' %}" class="btn btn-success btn-lg px-5 rounded-pill">
-                    ← Volver a la lista de clubes
-                </a>
+    .form-title {
+        font-size: 2.2rem;
+        font-weight: 700;
+        text-align: center;
+        color: #343a40;
+        margin-bottom: 3rem;
+        letter-spacing: 1.2px;
+    }
+
+    .btn-success {
+        background: #28a745;
+        color: #fff;
+        border: 1px solid transparent;
+        padding: 14px 20px;
+        border-radius: 8px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        transition: all 0.3s ease-in-out;
+        width: 100%;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        transform: scale(1.05);
+    }
+
+    .list-group-item {
+        font-size: 1rem;
+        border: none;
+        padding: 10px 15px;
+    }
+</style>
+
+<div class="container-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card">
+                    <h1 class="form-title">{{ club.nombre }}</h1>
+                    <p class="fs-5"><strong>Descripción:</strong> {{ club.descripcion }}</p>
+                    <p class="fs-5"><strong>Categoría:</strong> {{ club.get_categoria_display }}</p>
+                    <p class="fs-5"><strong>Horario:</strong> {{ club.horario }}</p>
+
+                    <h3 class="mt-4 text-primary">Eventos</h3>
+                    <ul class="list-group list-group-flush mb-4">
+                        {% for evento in eventos %}
+                        <li class="list-group-item">{{ evento.nombre }} - {{ evento.fecha }}</li>
+                        {% empty %}
+                        <li class="list-group-item">No hay eventos disponibles para este club.</li>
+                        {% endfor %}
+                    </ul>
+
+                    <h3 class="mt-4 text-primary">Miembros del Club</h3>
+                    <ul class="list-group list-group-flush">
+                        {% for miembro in club.miembros.all %}
+                        <li class="list-group-item">{{ miembro.username }}</li>
+                        {% empty %}
+                        <li class="list-group-item">No hay miembros en este club.</li>
+                        {% endfor %}
+                    </ul>
+
+                    <div class="text-center mt-4">
+                        <a href="{% url 'lista_clubes' %}" class="btn btn-primary btn-lg px-5 rounded-pill shadow-sm">
+                            ← Volver a la lista de clubes
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

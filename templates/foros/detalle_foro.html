@@ -1,18 +1,82 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="card shadow-lg rounded-4 border-0">
-        <div class="card-body p-5">
-            <h1 class="card-title text-center text-primary display-4 fw-bold mb-4">{{ foro.titulo }}</h1>
-            <ul class="list-group list-group-flush mb-4">
-                <li class="list-group-item fs-5"><strong>Club:</strong> {{ foro.club.nombre }}</li>
-                <li class="list-group-item fs-5"><strong>Descripción:</strong> {{ foro.contenido }}</li>
-            </ul>
-            <div class="text-center mt-4">
-                <a href="{% url 'lista_foros' %}" class="btn btn-success btn-lg px-5 rounded-pill">
-                    ← Volver a la lista de foros
-                </a>
+<style>
+    .container-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: calc(100vh - 120px); /* Espacio entre nav y footer */
+        margin: 60px 0; /* Espaciado superior e inferior */
+        background: #f8f9fa;
+    }
+
+    .card {
+        background: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        padding: 4rem 3rem;
+        box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .form-title {
+        font-size: 2.2rem;
+        font-weight: 700;
+        text-align: center;
+        color: #343a40;
+        margin-bottom: 3rem;
+        letter-spacing: 1.2px;
+    }
+
+    .btn-primary {
+        background: #007bff;
+        color: #fff;
+        border: 1px solid transparent;
+        padding: 14px 20px;
+        border-radius: 8px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        transition: all 0.3s ease-in-out;
+        width: 100%;
+    }
+
+    .btn-primary:hover {
+        background: #0056b3;
+        border-color: #004085;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        transform: scale(1.05);
+    }
+
+    .list-group-item {
+        font-size: 1rem;
+        border: none;
+        padding: 10px 15px;
+    }
+</style>
+
+<div class="container-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card">
+                    <h1 class="form-title">{{ foro.titulo }}</h1>
+                    <ul class="list-group list-group-flush mb-4">
+                        <li class="list-group-item"><strong>Club:</strong> {{ foro.club.nombre }}</li>
+                        <li class="list-group-item"><strong>Descripción:</strong> {{ foro.contenido }}</li>
+                    </ul>
+
+                    <div class="text-center mt-4">
+                        <a href="{% url 'lista_foros' %}" class="btn btn-primary btn-lg px-5 rounded-pill shadow-sm">
+                            ← Volver a la lista de foros
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
